@@ -13,7 +13,7 @@ from flask import Flask, jsonify, render_template, request, json
 
 errorMessages = [
     "<b>Error collecting input: format expected is <i>'Q:array'</i>, where <i>Q</i> is a quantifier interger value and <i>array</i> is a comma separated list of numbers</b>",
-    "<b>Error collecting input: format expected is <i>'array'</i> as a comma separated list of numbers>'</b>"]
+    "<b>Error collecting input: format expected is <i>'array'</i> as a comma separated list of numbers</b>"]
 
 
 app = Flask(__name__)
@@ -49,7 +49,7 @@ def getmin(values):
         # expected jsonify of dictionary of the form {'numbers': [1,2,3,4,5], 'quantifier': 2}
         r = json.loads(values.response[0])
         minimums = getMinOrMax(r['numbers'], r['quantifier'], True)
-        return "<b> Min values are " +  minimums + "</b>" 
+        return "The "+ str(r['quantifier']) + " Min value(s): " +  minimums 
     else:
         try:
             # expected string with format 1:1,2,3,4,5
@@ -57,7 +57,7 @@ def getmin(values):
             quantifier = int(strings[0])
             array = list(map(int,strings[1].split(','))) 
             minimums = getMinOrMax(array, quantifier, True)
-            return "<b> Min values are " +  minimums + "</b>" 
+            return "The "+ str(quantifier) + " Min values(s): " +  minimums 
         except:
             return errorMessages[0]
 
@@ -73,15 +73,15 @@ def getmax(values):
         # expected jsonify of dictionary of the form {'numbers': [1,2,3,4,5], 'quantifier': 2}
         r = json.loads(values.response[0])
         maximums = getMinOrMax(r['numbers'], r['quantifier'], False)
-        return "<b> Max values are " +  maximums + "</b>" 
+        return "The "+ str(r['quantifier']) + " Max value(s): " +  maximums
     else:
         try:
             # expected string with format 1:1,2,3,4,5
             strings = values.split(":")
             quantifier = int(strings[0])
             array = list(map(int,strings[1].split(','))) 
-            minimums = getMinOrMax(array, quantifier, False)
-            return "<b> Max values are " +  minimums + "</b>" 
+            maximums = getMinOrMax(array, quantifier, False)
+            return "The "+ str(quantifier) + " Max value(s): "+  maximums 
         except:
             return errorMessages[0]
     
@@ -96,13 +96,13 @@ def getavg(values):
         # expected jsonify of dictionary of the form {'numbers': [1,2,3,4,5]}
         r = json.loads(values.response[0])
         average_value = np.average(r['numbers'])
-        return "<b> Average is " +  str(average_value) + "</b>" 
+        return "The Average: " +  str(average_value)
     else:
         try:
             # expected string with format 1:1,2,3,4,5
             array = list(map(int,values.split(','))) 
             average_value = np.average(array)
-            return "<b> Average value is " +  str(average_value) + "</b>" 
+            return "The Average: " +  str(average_value)
         except:
             return errorMessages[1]
 
@@ -117,13 +117,13 @@ def getmed(values):
         # expected jsonify of dictionary of the form {'numbers': [1,2,3,4,5]}
         r = json.loads(values.response[0])
         median_value = np.median(r['numbers'])
-        return "<b> Median value is " +  str(median_value) + "</b>" 
+        return "The Median: " +  str(median_value)
     else:
         try:
             # expected string with format 1:1,2,3,4,5
             array = list(map(int,values.split(','))) 
             median_value = np.median(array)
-            return "<b> Median value are " +  str(median_value) + "</b>" 
+            return "The Median: " +  str(median_value)
         except:
             return errorMessages[1]
 
@@ -139,7 +139,7 @@ def getpercentile(values):
         # expected jsonify of dictionary of the form {'numbers': [1,2,3,4,5], 'quantifier': 2}
         r = json.loads(values.response[0])
         percentile_value = np.percentile(r['numbers'],r['quantifier'])
-        return "<b> Percentile value is " +  str(percentile_value) + "</b>" 
+        return "The "+ str(r['quantifier']) + " Percentile:  " +  str(percentile_value) 
     else:
         try:
             # expected string with format 1:1,2,3,4,5
@@ -147,7 +147,7 @@ def getpercentile(values):
             quantifier = int(strings[0])
             array = list(map(int,strings[1].split(','))) 
             percentile_value = np.percentile(array, quantifier)
-            return "<b> Percentile values is " +  str(percentile_value) + "</b>" 
+            return "The "+ str(quantifier) + " Percentile: " +  str(percentile_value) 
         except:
             return errorMessages[0]
 
