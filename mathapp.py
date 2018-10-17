@@ -164,8 +164,7 @@ def index():
             howmany = int(quantifier)
             
             values = {'numbers':numbers, 'quantifier':howmany}
-            print("got values")
-            print(values)
+            
         except:
             return errorMessages[0]
         
