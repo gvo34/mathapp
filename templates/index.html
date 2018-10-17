@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>mathapp</title>
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="jumbotron">
+        <h3> Input and submit:</h3>
+        <form method="POST" action="/">
+          <div class="form-row">
+            <div class="form-group col-md-8">
+            <label for="NumberList">Comma separated array of numbers</label>
+            <input type="text" class="form-control" name="arraynumber">
+            </div>
+            <div class="form-group col-md-2">
+            <label for="Count">Quantifier</label>
+            <input type="text" class="form-control" name="quantifier" placeholder="1" value="1">
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="submit" name="max_button" class="btn" value="Max">
+            <input type="submit" name="min_button" class="btn" value="Min">
+            <input type="submit" name="avg_button" class="btn" value="Average">
+            <input type="submit" name="med_button" class="btn" value="Median">
+            <input type="submit" name="per_button" class="btn" value="Percentile">
+          </div>
+      </form>
+      </div>
+      <hr>
+      <h3> Endpoint shortcuts:</h3>
+      <p> Alternative sevices calling, expecting input to be given as a string with the format <i>q:array</i>, 
+        where <i>q</i> is a positive integer value for the quantifier and <i>array</i> is a comma separated list of numbers.</p>
+        <p>  Services:</p>
+      <ul>
+        <li>
+        <b>/max </b> for example:  
+        <i> /max/3:2,3,5</i>
+        </li>
+        <li>
+          <b> /min </b>  for example 
+          <i> /min/1:2,3,-1 </i>
+        </li>
+        <li>
+          <b> /avg</b> for example
+          <i>/avg/2,3,7,2,1,8</i>
+        </li>
+        <li>
+          <b> /median </b> for example
+          <i>/median/2.4,3,6,1</i>
+        </li>
+        <li>
+          <b> /percentile </b> for example
+          <i>/percentile/25:100,72,200,100,200</i>
+        </li>
+      </ul>
+    </div>
+   
+  </body>
+
+</html>
